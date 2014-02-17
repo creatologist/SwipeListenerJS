@@ -19,13 +19,13 @@ Easily tap into swipe events for desktop and mobile/touch. Swipe events are spec
 ### 
 ```javascript
 	// SwipeListener events
-	+ onTouchStart: function( swipeListener ) {..}
-	+ onTouchEnd: function( swipeListener ) {..}
-	+ onSwipeLeft: function( swipeListener ) {..}
-	+ onSwipeRight: function( swipeListener ) {..}
-	+ onSwipeUp: function( swipeListener ) {..}
-	+ onSwipeDown: function( swipeListener ) {..}
-	+ onResize: function( swipeListener ) {..}
+	+ onTouchStart: function( swipeListener ) {...}
+	+ onTouchEnd: function( swipeListener ) {...}
+	+ onSwipeLeft: function( swipeListener ) {...}
+	+ onSwipeRight: function( swipeListener ) {...}
+	+ onSwipeUp: function( swipeListener ) {...}
+	+ onSwipeDown: function( swipeListener ) {...}
+	+ onResize: function( swipeListener ) {...}
 	
 	// SwipeListener options
 	+ minX  /* default: 0 - minimum ∆X (in pixels) before triggering a swipe */
