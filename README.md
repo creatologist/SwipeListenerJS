@@ -1,18 +1,22 @@
 #SwipeListener
 Easily tap into swipe events for desktop and mobile/touch. Swipe events are specific to your elements bounding box and doesn't drag/drop your element around.
 
-### View Example
+### Example
 [http://christophermil.es/SwipeListener](http://christophermil.es/SwipeListener)
 
-### Sample Code
+### Example Code
 ```javascript
 	
 	$content = document.getElementById( 'content' );
 	
 	swipeListener = new SwipeListener( $content, {
-		onSwipeLeft: function( sl ) {...},
+		onSwipeLeft: function( sl ) {
+			sl.doSomething();
+		},
 		onSwipeRight: function( sl ) {...}
 	});
+	
+	swipeListener.doSomething = function() {...};
 	
 ```
 
