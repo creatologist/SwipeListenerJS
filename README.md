@@ -30,6 +30,6 @@ Easily tap into swipe events for desktop and mobile/touch. Swipe events are spec
 	// SwipeListener options
 	+ minX  /* minimum ∆X before triggering a swipe */
 	+ minY  /* minimum ∆Y before triggering a swipe */
-	+ minXPercent  /* minimum deltaX (in percent - based on width) */
-	+ minYPercent  /* minimum deltaY (in percent - based on height) */
+	+ minXPercent  /* minimum ∆X (in percent - based on width) */
+	+ minYPercent  /* minimum ∆Y (in percent - based on height) */
 ```
