@@ -11,12 +11,12 @@ Easily tap into swipe events for desktop and mobile/touch. Swipe events are spec
 	
 	swipeListener = new SwipeListener( $content, {
 		onSwipeLeft: function( sl ) {
-			sl.doSomething();
+			sl.doSomething( sl.deltaX );
 		},
 		onSwipeRight: function( sl ) {...}
 	});
 	
-	swipeListener.doSomething = function() {...};
+	swipeListener.doSomething = function( dist ) {...};
 	
 ```
 
@@ -36,4 +36,16 @@ Easily tap into swipe events for desktop and mobile/touch. Swipe events are spec
 	+ minY  /* default: 0 - minimum ∆Y (in pixels) triggering a swipe */
 	+ minXPercent  /* minimum ∆X (in percent - based on width) */
 	+ minYPercent  /* minimum ∆Y (in percent - based on height) */
+	
+	// SwipeListener vars
+	+ deltaX
+	+ deltaY
+	+ startX
+	+ startY
+	+ x
+	+ y
+	+ endX
+	+ endY
+	+ width /* of element */
+	+ height /* of element */
 ```
