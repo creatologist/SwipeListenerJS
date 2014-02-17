@@ -38,6 +38,9 @@ var SwipeListener = function( element, options  ) {
 	this.minX = 0;
 	this.minY = 0;
 	
+	this.deltaX = 0;
+	this.deltaY = 0;
+	
 	this.width = element.offsetWidth;
 	this.height = element.offsetHeight;
 	
@@ -144,6 +147,9 @@ SwipeListener.prototype = {
 		
 		var dX = this.endX - this.startX;
 		var dY = this.endY - this.startY;
+		
+		this.deltaX = dX;
+		this.deltaY = dY;
 		
 		var x = Math.abs( dX );
 		var y = Math.abs( dY );
