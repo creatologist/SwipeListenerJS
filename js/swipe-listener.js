@@ -21,7 +21,7 @@
 //===============================================================================================
 //-----------------------------------------------------------------------------------------------
 
-var SwipeListener = function( element, options  ) {
+var SwipeListener = function( element, options, finishCallback ) {
 	this.element = element;
 	
 	this.startTime;
@@ -74,9 +74,16 @@ var SwipeListener = function( element, options  ) {
 	if ( this.options.minYPercent ) this.minY = this.options.minYPercent;
 	
 	this.onResize();
+	
+	if ( typeof options == 'function' ) options( this );
+	else if ( finishCallback && typeof finishCallback == 'function' ) finishCallback( this );
 };
 
 SwipeListener.prototype = {
+	
+	isTouchDevice: function() {
+		return 'ontouchstart' in window || 'onmsgesturechange' in window;
+	},
 	
 	handleEvent: function(e) {
 	    switch (e.type) {
