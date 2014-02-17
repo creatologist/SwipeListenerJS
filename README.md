@@ -2,7 +2,7 @@
 Easily tap into swipe events for desktop and mobile/touch. Swipe events are specific to your elements bounding box and doesn't drag/drop your element around.
 
 ### Example
-[http://christophermil.es/SwipeListener](http://christophermil.es/SwipeListener)
+[http://christophermil.es/SwipeListenerJS](http://christophermil.es/SwipeListenerJS)
 
 ### Example Code
 ```javascript
