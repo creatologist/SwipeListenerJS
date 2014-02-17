@@ -187,5 +187,7 @@ SwipeListener.prototype = {
 		//this.width = this.element.getBoundingClientRect().width;
 		//this.height = this.element.getBoundingClientRect().width;
 		
+		if ( this.options.onResize ) this.options.onResize( this );
+		
 	}
 };
