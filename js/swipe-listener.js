@@ -50,7 +50,9 @@ var SwipeListener = function( element, options  ) {
 	    this.element.addEventListener('drag', this, false);
 	    this.element.addEventListener('touchmove', this, false);
 	    
+	    
 	    this.element.addEventListener('mouseup', this, false);
+	    this.element.addEventListener('touchleave', this, false);
 	    this.element.addEventListener('touchcancel', this, false);
 	    this.element.addEventListener('touchend', this, false);
 	    
@@ -84,6 +86,7 @@ SwipeListener.prototype = {
 	    	
 	    	case 'mouseup':
 	    	case 'touchcancel':
+	    	case 'touchleave':
 	    	case 'touchend': this.onTouchEnd(e); break;
 	    	
 	    	case 'resize': this.onResize( e ); break;
