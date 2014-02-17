@@ -18,7 +18,7 @@
 			#content {
 				width: 100%;
 				height: 100%;
-				background-color: #bebebe;
+				background-color: #a0d9f6;
 				text-align: center;
 				-webkit-touch-callout: none;
 				-webkit-user-select: none;
@@ -54,11 +54,11 @@
 			
 			swipeListener = new SwipeListener( $content, {
 				onTouchStart : function( sl ) {
-					$content.style.backgroundColor = '#8b8888';
+					$content.style.backgroundColor = '#7cbedf';
 					$contentLabel.innerHTML = 'onTouchStart';
 				},
 				onTouchEnd : function( sl ) {
-					$content.style.backgroundColor = '#bebebe';
+					$content.style.backgroundColor = '#a0d9f6';
 				},
 				onTouchMove : function( sl ) {
 					$contentLabel.innerHTML = 'onTouchMove';
