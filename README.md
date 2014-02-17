@@ -28,8 +28,8 @@ Easily tap into swipe events for desktop and mobile/touch. Swipe events are spec
 	+ onResize( swipeListener )
 	
 	// SwipeListener options
-	+ minX  /* minimum ∆X before triggering a swipe */
-	+ minY  /* minimum ∆Y before triggering a swipe */
+	+ minX  /* default: 0 - minimum ∆X (in pixels) before triggering a swipe */
+	+ minY  /* default: 0 - minimum ∆Y (in pixels) triggering a swipe */
 	+ minXPercent  /* minimum ∆X (in percent - based on width) */
 	+ minYPercent  /* minimum ∆Y (in percent - based on height) */
 ```
