@@ -7,9 +7,9 @@ Easily tap into swipe events for desktop and mobile/touch. Swipe events are spec
 ### Example Code
 ```javascript
 	
-	$content = document.getElementById( 'content' );
+	$element = document.getElementById( 'element' );
 	
-	swipeListener = new SwipeListener( $content, {
+	swipeListener = new SwipeListener( $element, {
 		onSwipeLeft: function( sl ) {
 			sl.doSomething( sl.deltaX );
 		},
