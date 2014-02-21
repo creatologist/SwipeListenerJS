@@ -157,6 +157,12 @@ SwipeListener.prototype = {
 			this.globalY = e.y;
 		}
 		
+		var dX = this.globalX - this.globalStartX;
+		var dY = this.globalY - this.globalStartY;
+		
+		this.deltaX = dX;
+		this.deltaY = dY;
+		
 		this.x = this.globalX - this.offsetX;
 		this.y = this.globalY - this.offsetY;
 		
@@ -225,6 +231,8 @@ SwipeListener.prototype = {
 				}
 			}
 		}
+		
+		if ( this.options.onSwipe ) this.options.onSwipe( this );
 		
 	},
 	
