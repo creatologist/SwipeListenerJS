@@ -26,14 +26,10 @@ var SwipeListener = function( element, options, finishCallback ) {
 	
 	this.startTime;
 	
-	this.x	= 0;
-	this.y = 0;
+	this.offsetX = element.offsetLeft;
+	this.offsetY = element.offsetTop;
 	
-	this.startX = 0;
-	this.startY = 0;
-	
-	this.endX = 0;
-	this.endY = 0;
+	this.reset();
 	
 	this.minX = 0;
 	this.minY = 0;
@@ -53,17 +49,27 @@ var SwipeListener = function( element, options, finishCallback ) {
 	    this.element.addEventListener('drag', this, false);
 	    this.element.addEventListener('touchmove', this, false);
 	    
+	    window.addEventListener('mouseup', this, false);
+	    window.addEventListener('touchleave', this, false);
+	    window.addEventListener('touchcancel', this, false);
 	    
-	    this.element.addEventListener('mouseup', this, false);
-	    this.element.addEventListener('touchleave', this, false);
-	    this.element.addEventListener('touchcancel', this, false);
-	    this.element.addEventListener('touchend', this, false);
 	    
-	    this.element.addEventListener('webkitTransitionEnd', this, false);
-	    this.element.addEventListener('msTransitionEnd', this, false);
-	    this.element.addEventListener('oTransitionEnd', this, false);
-	    this.element.addEventListener('transitionend', this, false);
-	    this.element.addEventListener('click', this, false);
+	    // if using window.ontouchend already, add our func into old func
+	    var self = this;
+	    if ( window.ontouchend ) {
+	    	var rand = 'ontouchend' + Math.random();
+	    	window[ rand ] = window.ontouchend;
+	    	window.ontouchend = function( e ) {
+	    		window[ rand ].call( e );
+	    		self.onTouchEnd( e );
+	    	};
+	    } else {
+	    	window.ontouchend = function( e ) {
+	    		self.onTouchEnd( e );
+	    	};
+	    }
+	    
+	    //this.element.addEventListener('click', this, false);
 	    window.addEventListener('resize', this, false);
 	}
 	
@@ -80,7 +86,25 @@ var SwipeListener = function( element, options, finishCallback ) {
 };
 
 SwipeListener.prototype = {
-	
+	reset: function() {
+		this.x = 0;
+		this.y = 0;
+		
+		this.startX = 0;
+		this.startY = 0;
+		
+		this.endX = 0;
+		this.endY = 0;
+		
+		this.globalX = 0;
+		this.globalY = 0;
+		
+		this.globalStartX = 0;
+		this.globalStartY = 0;
+		
+		this.globalEndX = 0;
+		this.globalEndY = 0;
+	},
 	isTouchDevice: function() {
 		return 'ontouchstart' in window || 'onmsgesturechange' in window;
 	},
@@ -105,16 +129,19 @@ SwipeListener.prototype = {
 	
 	onTouchStart : function( e ) {
 		//e.preventDefault();
-		//e.preventDefault();
+		//e.stopPropagation();
 		this.startTime = new Date();
 		
-		if ( e.touches ) {
-			this.startX = e.touches[0].pageX;
-			this.startY = e.touches[0].pageY;
+		if ( e.touches && e.touches[0] ) {
+			this.globalStartX = e.touches[0].pageX;
+			this.globalStartY = e.touches[0].pageY;
 		} else {
-			this.startX = e.x;
-			this.startY = e.y;
+			this.globalStartX = e.x;
+			this.globalStartY = e.y;
 		}
+		
+		this.startX = this.globalStartX - this.offsetX;
+		this.startY = this.globalStartY - this.offsetY;
 		
 		if ( this.options.onTouchStart ) this.options.onTouchStart( this );
 	},
@@ -122,20 +149,16 @@ SwipeListener.prototype = {
 		
 		e.preventDefault();
 		//e.stopPropagation();
-		if ( e.touches ) {
-			this.x = e.touches[0].pageX;
-			this.y = e.touches[0].pageY;
+		if ( e.touches && e.touches[0] ) {
+			this.globalX = e.touches[0].pageX;
+			this.globalY = e.touches[0].pageY;
 		} else {
-			this.x = e.x;
-			this.y = e.y;
+			this.globalX = e.x;
+			this.globalY = e.y;
 		}
 		
-		if ( this.toCheck ) clearTimeout( this.toCheck );
-		
-		var self = this;
-		this.toCheck = setTimeout( function() {
-			self.onTouchEnd( e );
-		}, 75 );
+		this.x = this.globalX - this.offsetX;
+		this.y = this.globalY - this.offsetY;
 		
 		if ( this.options.onTouchMove ) this.options.onTouchMove( this );
 	},
@@ -144,16 +167,19 @@ SwipeListener.prototype = {
 		//e.stopPropagation();
 		var dTime = new Date() - this.startTime;
 		
-		if ( e.touches ) {
-			this.endX = e.touches[0].pageX;
-			this.endY = e.touches[0].pageY;
+		if ( e.touches && e.touches[0] ) {
+			this.globalEndX = e.touches[0].pageX;
+			this.globalEndY = e.touches[0].pageY;
 		} else {
-			this.endX = e.x;
-			this.endY = e.y;
+			this.globalEndX = e.x;
+			this.globalEndY = e.y;
 		}
 		
-		var dX = this.endX - this.startX;
-		var dY = this.endY - this.startY;
+		this.endX = this.globalEndX - this.offsetX;
+		this.endY = this.globalEndY - this.offsetY;
+		
+		var dX = this.globalEndX - this.globalStartX;
+		var dY = this.globalEndY - this.globalStartY;
 		
 		this.deltaX = dX;
 		this.deltaY = dY;
