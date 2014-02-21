@@ -167,9 +167,15 @@ SwipeListener.prototype = {
 		//e.stopPropagation();
 		var dTime = new Date() - this.startTime;
 		
-		if ( e.touches && e.touches[0] ) {
-			this.globalEndX = e.touches[0].pageX;
-			this.globalEndY = e.touches[0].pageY;
+		if ( e.touches ) {
+			if ( e.touches[0] ) {
+				this.globalEndX = e.touches[0].pageX;
+				this.globalEndY = e.touches[0].pageY;
+			} else {
+				this.globalEndX = this.globalX;
+				this.globalEndY = this.globalY;
+			}
+			
 		} else {
 			this.globalEndX = e.x;
 			this.globalEndY = e.y;
